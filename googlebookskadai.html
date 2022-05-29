@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" href="css/samplekadai.css">
+<title>GoogleBook検索</title>
+</head>
+<body>
+
+  <header>
+    <h1>GoogleBooks検索</h1>
+    <p>
+      <input type="text" id="keyword" value="レスポンシブWeb">
+      <button id="readbook">データ読み込み</button>
+      <button id="clear">クリア</button>
+    </p>
+  </header>
+
+  <main>
+    <p id="colum">`<ul><li>タイトル</li><li>出版社</li></ul>`</p>
+    <p id="content"></p>
+  </main>
+
+
+<script src="js/jquery-3.5.1.min.js"></script>
+<script>
+// 手順
+// 1. $.get() を使って 情報を取得する
+// 2. JSONデータ構造を基に本のタイトルを取得する
+
+//ulrから検索情報取得するとitemのvolumeInfoのなかに本のタイトルなど
+//urlのあとに?q=キーワードで検索条件を指定可能
+//情報があるためitemのなかを取得しにいく
+
+// 4. クリックイベントで括る
+// 5. id="keyword"の入力値を取得 → URLの"?q=jquery"の"queryの文字を取得した入力値（変数）に変える"
+$("#readbook").on("click", function(){
+
+    let url = "https://www.googleapis.com/books/v1/volumes?q=jquery"
+    const word = $("#keyword").val();
+    console.log(word)
+
+    url = url.replace("jquery", word) //"jquery"をwordの文字に変換
+
+    $.get(url, function(data){
+        $("#content").empty(); //一度空にする
+            console.log(data);
+            const items = data.items
+        
+        for (let i = 0; i < items.length; i++){
+            console.log(items)
+            const title = items[i].volumeInfo.title;
+            const publisher = items[i].volumeInfo.publisher;
+            const result = `<ul><li id="${[i]}">${title}</li><li>${publisher}</li></ul>`
+            $("#content").append(result) //検索結果表示する
+        }
+            
+    })
+})
+
+//検索結果を消去するクリアボタン
+$('#clear').on('click',function(){
+    $('#content').empty();
+});
+
+</script>
+</body>
+</html>
+

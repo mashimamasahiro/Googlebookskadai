@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>関数</title>
+</head>
+<body>
+    <button id="button">クリック</button>
+<script src="./js/jquery-3.5.1.min.js"></script>
+<script>
+
+// 関数の基本形
+// function helloで２つを呼び出すと宣言。function つける名前（）｛｝の順
+// 視認性、持ちはこびに便利。関数は機能を伴うので名前は「動詞」にすることが多い。
+function hello(){
+    console.log('こんにちは');
+    console.log('JS授業中です');
+};
+//以下で呼び出す（実行）
+hello();
+
+// 関数の引数(実行時にデータを注入)・戻り値（）
+// ()内に引数をいれると関数内にデータを入れることができる。
+// 実行時の()にテキストをいれることでconsole logに代入できる
+// 引数を２つ設定することも可能。
+function hello2(text){
+    console.log(text);
+};
+hello2('こんばんは');
+hello2('JS4回目です');
+
+// 引数を２つ設定することも可能。足し算をするときに便利
+function hello3(t,u){
+    console.log(t);
+    console.log(u);
+};
+hello3('こんばんは','坂尻さん');
+hello3('JS4回目です','坂尻さん');
+
+
+//関数の戻り値return（関数の実行結果を外側に出すもの）
+//returnする値がないときはエラーになる
+function add(a,b){
+    // console.log(a+b);
+    return a+b;
+};
+console.log(add(4,5));
+
+const total = add(2,3);
+console.log(total);
+
+
+// クリックイベント
+// $("#button").on("click", function () {
+//     alert("こんにちは");
+//     alert("JS授業中です");
+// });
+
+//()をつけると関数を実行した結果を返す
+//関数単体で表現することきは（）をつけない
+console.log(hello);
+console.log(hello());
+$("#button").on("click", hello);
+ 
+
+
+</script>
+
+</body>
+
+</html>
